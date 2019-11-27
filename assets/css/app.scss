@@ -5,5 +5,15 @@ $secondary: #3f51b5;
 
 body {
     background-color: $primary;
+    color: white;
 }
 
+.boxSeason{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.boxByEpisode{
+    margin:4%;
+
+}

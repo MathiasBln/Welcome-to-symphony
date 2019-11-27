@@ -10,8 +10,17 @@
             <h1 class="mt-0">{{ program.title }}</h1>
             <p>{{ program.summary }}</p>
             <p>Categorie : {{ program.category.name }}</p>
+
+            {% for season in seasons %}
+            <div class="media">
+                <p><a href="/wild/season/{{ season.id }}">
+                        {{ season.year }}
+                    </a></p>
+            </div>
+            {% endfor %}
         </div>
     </div>
+
 
     <a href="{{ path('app_index') }}">
         Retour à l'accueil
