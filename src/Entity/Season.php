@@ -84,8 +84,6 @@ class Season
 
 
 
-
-
     public function getId(): ?int
     {
         return $this->id;
