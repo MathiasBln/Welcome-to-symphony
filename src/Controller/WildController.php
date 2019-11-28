@@ -7,7 +7,8 @@ use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Episode;
 use App\Form\ProgramSearchType;
-use http\Env\Request;
+use App\Form\CategoryType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,10 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class WildController extends AbstractController
 {
     /**
+     * @param Request $request
      * @Route("", name="wild_index")
      * @return Response A response instance
      */
-    public function index() :Response
+    public function index(Request $request) :Response
     {
 
         $programs = $this->getDoctrine()
@@ -35,17 +37,10 @@ class WildController extends AbstractController
 
         }
 
-        $form = $this->createForm(
-            ProgramSearchType::class,
-            null,
-            ['method' => Request::METHOD_GET]
-        );
+
         return $this->render('wild/index.html.twig', [
             'website' => 'Wild Séries',
-            'wild/index.html.twig', [
-                'programs' => $programs,
-                'form' => $form->createView(),
-                ]
+            'programs' => $programs,
 
         ]);
     }
@@ -164,7 +159,7 @@ class WildController extends AbstractController
 
     /**
      * @param Episode $episode
-     * @Route("wild/episode/{episode}", name="wild_episode")
+     * @Route("episode/{episode}", name="wild_episode")
      * @return Response
      */
     public function showEpisode(Episode $episode): Response
