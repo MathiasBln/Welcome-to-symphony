@@ -1,0 +1,24 @@
+{# templates/wild/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="media boxSeason">
+            <div class="media-body boxByEpisode">
+                <p>{{ episode.synopsis}}</p>
+                <p>{{ season.year}}</p>
+                <p>{{ program.title}}</p>
+            </div>
+    </div>
+    <a href="{{ path('app_index') }}">
+        Retour à l'accueil
+    </a>
+
+    <a href="/wild/show/{{ program.title|replace({" ":"-"})|lower  }}">
+    <button type="button">
+            Retour à la série
+    </button>
+    </a>
+
+{% endblock %}
