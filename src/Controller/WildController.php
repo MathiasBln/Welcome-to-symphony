@@ -6,14 +6,19 @@ use App\Entity\Category;
 use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Episode;
+use App\Form\ProgramSearchType;
+use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("wild/")
+ */
 class WildController extends AbstractController
 {
     /**
-     * @Route("wild/", name="wild_index")
+     * @Route("", name="wild_index")
      * @return Response A response instance
      */
     public function index() :Response
@@ -29,9 +34,19 @@ class WildController extends AbstractController
             );
 
         }
+
+        $form = $this->createForm(
+            ProgramSearchType::class,
+            null,
+            ['method' => Request::METHOD_GET]
+        );
         return $this->render('wild/index.html.twig', [
             'website' => 'Wild Séries',
-            'programs' => $programs
+            'wild/index.html.twig', [
+                'programs' => $programs,
+                'form' => $form->createView(),
+                ]
+
         ]);
     }
 
@@ -40,7 +55,7 @@ class WildController extends AbstractController
 
     /**
      * @param string $categoryName
-     * @Route("wild/category/{categoryName}", defaults={"categoryName" = null}, name="show_category")
+     * @Route("category/{categoryName}", defaults={"categoryName" = null}, name="show_category")
      * @return Response
      */
     public function showByCategory(string $categoryName)
@@ -78,7 +93,7 @@ class WildController extends AbstractController
 
     /**
      * @param string $slug The slugger
-     * @Route("wild/show/{slug}", name="wild_show")
+     * @Route("show/{slug}", name="wild_show")
      * @return Response
      */
     public function showByProgram(string $slug): Response
@@ -115,7 +130,7 @@ class WildController extends AbstractController
 
     /**
      * @param int $id
-     * @Route("wild/season/{id}", name="wild_season")
+     * @Route("season/{id}", name="wild_season")
      * @return Response
      */
     public function showBySeason(int $id): Response
