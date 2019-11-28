@@ -7,8 +7,11 @@
     <div class="media boxSeason">
     {% for episode in episodes %}
         <div class="media-body boxByEpisode">
-            <h1 class="mt-0">{{ episode.title }}</h1>
-            <p>{{ episode.synopsis }}</p>
+            <h1 class="mt-0">
+                <a href="/wild/episode/{{ episode.id }}">
+                    {{ episode.title }}
+                </a>
+            </h1>
         </div>
 
     {% endfor %}
