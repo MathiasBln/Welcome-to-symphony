@@ -6,17 +6,24 @@ use App\Entity\Category;
 use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Episode;
+use App\Form\ProgramSearchType;
+use App\Form\CategoryType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("wild/")
+ */
 class WildController extends AbstractController
 {
     /**
-     * @Route("wild/", name="wild_index")
+     * @param Request $request
+     * @Route("", name="wild_index")
      * @return Response A response instance
      */
-    public function index() :Response
+    public function index(Request $request) :Response
     {
 
         $programs = $this->getDoctrine()
@@ -29,9 +36,12 @@ class WildController extends AbstractController
             );
 
         }
+
+
         return $this->render('wild/index.html.twig', [
             'website' => 'Wild Séries',
-            'programs' => $programs
+            'programs' => $programs,
+
         ]);
     }
 
@@ -40,7 +50,7 @@ class WildController extends AbstractController
 
     /**
      * @param string $categoryName
-     * @Route("wild/category/{categoryName}", defaults={"categoryName" = null}, name="show_category")
+     * @Route("category/{categoryName}", defaults={"categoryName" = null}, name="show_category")
      * @return Response
      */
     public function showByCategory(string $categoryName)
@@ -78,7 +88,7 @@ class WildController extends AbstractController
 
     /**
      * @param string $slug The slugger
-     * @Route("wild/show/{slug}", name="wild_show")
+     * @Route("show/{slug}", name="wild_show")
      * @return Response
      */
     public function showByProgram(string $slug): Response
@@ -115,7 +125,7 @@ class WildController extends AbstractController
 
     /**
      * @param int $id
-     * @Route("wild/season/{id}", name="wild_season")
+     * @Route("season/{id}", name="wild_season")
      * @return Response
      */
     public function showBySeason(int $id): Response
@@ -149,7 +159,7 @@ class WildController extends AbstractController
 
     /**
      * @param Episode $episode
-     * @Route("wild/episode/{episode}", name="wild_episode")
+     * @Route("episode/{episode}", name="wild_episode")
      * @return Response
      */
     public function showEpisode(Episode $episode): Response
