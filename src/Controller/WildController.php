@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Episode;
+use App\Entity\Actor;
 use App\Form\ProgramSearchType;
 use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
@@ -110,11 +111,13 @@ class WildController extends AbstractController
                 'No program with '.$slug.' title, found in program\'s table.'
             );
         }
+
         $seasons = $this->getDoctrine()
             ->getRepository(Season::class)
             ->findBy([
                 'program' => $program,
             ]);
+
         return $this->render('wild/show.html.twig', [
             'program' => $program,
             'slug'  => $slug,
@@ -175,6 +178,22 @@ class WildController extends AbstractController
             'episode' => $synopsis,
             'season' => $season,
             'program' => $program,
+        ]);
+    }
+
+
+    /**
+     * @param Actor $actor
+     * @Route("actor/{id}", name="wild_actor")
+     * @return Response
+     */
+    public function showActor(Actor $actor): Response
+    {
+        $program = $actor ->getPrograms();
+
+        return $this->render('wild/actor.html.twig', [
+            'actor' => $actor,
+            'programs' => $program,
         ]);
     }
 }
