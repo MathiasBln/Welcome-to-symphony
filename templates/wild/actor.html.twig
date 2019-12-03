@@ -1,0 +1,16 @@
+{# templates/wild/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+            <strong>série :</strong>
+            <ul>
+                {% for program in programs %}
+                    <li><a href="/wild/show/{{ program.title }}">
+                            {{ program.title }}
+                        </a></li>
+                {% else %}
+                    <li>Aucune série pour cet acteur</li>
+                {% endfor %}
+            </ul>
+{% endblock %}
