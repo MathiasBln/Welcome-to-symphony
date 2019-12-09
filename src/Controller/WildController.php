@@ -9,6 +9,7 @@ use App\Entity\Episode;
 use App\Entity\Actor;
 use App\Form\ProgramSearchType;
 use App\Form\CategoryType;
+use App\Service\Slugify;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -196,4 +197,5 @@ class WildController extends AbstractController
             'programs' => $program,
         ]);
     }
+
 }
