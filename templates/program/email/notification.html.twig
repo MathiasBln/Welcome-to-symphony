@@ -1,0 +1,14 @@
+{% extends 'layout_mail.html.twig' %}
+
+
+{% block title %}Info Program{% endblock %}
+
+{% block body %}
+    <div style="background-color: grey">
+<h1 style="color: purple">{{ program.title }}</h1>
+
+    <p style="color: white">C'est un avion? c'est un oiseau? non c'est  COUCOU DE LOLO</p>
+
+    <a href="http://localhost:8000/wild/show/{{ program.title }}">lien pour voir la page</a>
+    </div>
+{% endblock %}
